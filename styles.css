@@ -14,8 +14,7 @@ body {
 }
 
 main,
-section,
-div {
+section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,6 +67,19 @@ h3 {
     width: 200px;
     margin-bottom: 35px;
     font-size: 13px;
+}
+
+.classic-game-board,
+.difficult-game-board {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    height: 200px;
+    width: 200px;
 }
 
 .hidden {

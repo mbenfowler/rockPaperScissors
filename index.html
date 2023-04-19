@@ -7,14 +7,14 @@
         <title>Rock, Paper, Scissors!</title>
     </head>
     <body>
-        <div class="side-panel player-section">
+        <section class="side-panel player-section">
             <span>&#129489;</span>
             <span>Human</span>
             <span>Wins: 0</span>
-        </div>
+        </section>
         <main class="game-area">
-            <div class="game-selection">
-                <h1>Rock, Paper, Scissors</h1>
+            <h1>Rock, Paper, Scissors</h1>
+            <section class="game-selection">
                 <h2>Choose your game!</h2>
                 <section class="game-option classic-game">
                     <h3>&#129704; Classic &#9986;</h3>
@@ -30,15 +30,31 @@
                     <span>lizard > paper & alien</span>
                     <span>alien > scissors & rock</span>
                 </section>
+            </section>
+            <div class="classic-game-board hidden">
+                <h2>Choose your fighter!</h2>
+                <div class="fighters">
+                    <img src="./assets/happy-rocks.png">
+                    <img src="./assets/happy-paper.png">
+                    <img src="./assets/happy-scissors.png">
+                </div>
             </div>
-            <div class="classic-game-board hidden"></div>
-            <div class="difficult-game-board hidden"></div>
+            <div class="difficult-game-board hidden">
+                <h2>Choose your fighter!</h2>
+                <div class="fighters">
+                    <img src="./assets/happy-rocks.png">
+                    <img src="./assets/happy-paper.png">
+                    <img src="./assets/happy-scissors.png">
+                    <img src="./assets/lizard.png">
+                    <img src="./assets/happy-alien.png">
+                </div>
+            </div>
         </main>
-        <div class="side-panel player-section">
+        <section class="side-panel player-section">
             <span>&#129302;</span>
             <span>Computer</span>
             <span>Wins: 0</span>
-        </div>
+        </section>
         <script type="text/javascript" src="main.js"></script>
     </body>
 </html>
