@@ -1,0 +1,71 @@
+html {
+    height: 100%;
+    background-color: #CD82EF;
+    text-align: center;
+    font-family: 'Chalkduster', fantasy, apple color emoji;
+    color: white;
+}
+
+body {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+
+main,
+section,
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    min-width: 200px;
+}
+
+h1 {
+    margin: 5% 0 2% 0;
+    font-size: 50px;
+    font-weight: 1500;
+}
+
+h2 {
+    margin-bottom: 80px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 20px;
+    padding-bottom: 2%;
+}
+
+.game-area {
+    background-color: #C66AF0;
+    flex-grow: 1;
+}
+
+.side-panel {
+    max-width: 200px;
+    flex-shrink: 0;
+    font-size: 20px;
+}
+
+.side-panel > span:nth-child(1) {
+    padding-top: 30px;
+}
+
+.side-panel > span:nth-child(n+2) {
+    padding-bottom: 30px;
+}
+
+.game-option {
+    justify-content: start;
+    background-color: #AA4AD9;
+    min-height: 165px;
+    height: 150px;
+    width: 200px;
+    margin-bottom: 35px;
+    font-size: 13px;
+}
