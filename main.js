@@ -1,7 +1,16 @@
 var game;
 
+var rules = {
+    'rock': ['scissors', 'lizard'],
+    'paper': ['rock', 'alien'],
+    'scissors': ['paper', 'lizard'],
+    'lizard': ['paper', 'alien'],
+    'alien': ['scissors', 'rock']
+}
+
 var gameSelectionView = document.querySelector('.game-selection');
-var gameBoardView = document.querySelector('.game-board');
+var classicGameBoardView = document.querySelector('.classic-game-board');
+var difficultGameBoardView = document.querySelector('.difficult-game-board');
 var gameOption = document.querySelectorAll('.game-option');
 
 gameOption.forEach((option) => {
@@ -10,8 +19,6 @@ gameOption.forEach((option) => {
         selectGameType(e);
         createPlayers();
         gameSelectionView.classList.toggle('hidden');
-        gameBoardView.classList.toggle('hidden');
-        console.log(game)
     });
 });
 
@@ -25,8 +32,10 @@ function createNewGame() {
 function selectGameType(event) {
     if (event.currentTarget.classList.contains('classic-game')) {
         game.gameType = 'classic';
+        classicGameBoardView.classList.toggle('hidden');
     } else if (event.currentTarget.classList.contains('difficult-game')) {
         game.gameType = 'difficult';
+        difficultGameBoardView.classList.toggle('hidden');
     }
 }
 
@@ -42,4 +51,31 @@ function createPlayer(playerType, playerToken) {
         playerToken,
         wins: 0
     };
+}
+
+function playGame(chosenFighter) {
+    var computerFighter = getRandomFighter();
+    if (chosenFighter === computerFighter) {
+        return ` emoji It's a draw! emoji`
+    }
+    
+    var winner = getWinner(chosenFighter, computerFighter)
+    return `emoji ${winner} won this round! emoji`
+}
+
+function getWinner(chosenFighter, computerFighter) {
+    if (rules[chosenFighter].includes(computerFighter)) {
+        return game.players[0].playerType;
+    } else {
+        return game.players[1].playerType;
+    }
+}
+
+function getRandomFighter() {
+    var rulesKeys = Object.keys(rules)
+    return rulesKeys[getRandomIndex(rulesKeys)]
+}
+
+function getRandomIndex(array) {
+    return Math.floor(Math.random() * array.length);
 }
