@@ -8,9 +8,9 @@ var rules = {
     'alien': ['scissors', 'rock']
 }
 
+var chosenFighter;
+
 var gameSelectionView = document.querySelector('.game-selection');
-var classicGameBoardView = document.querySelector('.classic-game-board');
-var difficultGameBoardView = document.querySelector('.difficult-game-board');
 var gameOption = document.querySelectorAll('.game-option');
 var gameBoards = document.querySelectorAll('.game-board');
 var fighterAreas = document.querySelectorAll('.fighters');
@@ -19,12 +19,19 @@ var computerWins = document.getElementById('computerWins');
 
 gameOption.forEach((option) => {
     option.addEventListener('click', function(e) {
-        createNewGame()
+        createNewGame();
         selectGameType(e);
         createPlayers();
         gameSelectionView.classList.toggle('hidden');
     });
 });
+
+gameBoards.forEach((board) => {
+    board.addEventListener('click', function(e) {
+        selectFighter(e);
+        this.firstElementChild.innerText = playGame(chosenFighter);
+    })
+})
 
 function createNewGame() {
     game = {
@@ -36,10 +43,10 @@ function createNewGame() {
 function selectGameType(event) {
     if (event.currentTarget.classList.contains('classic-game')) {
         game.gameType = 'classic';
-        classicGameBoardView.classList.toggle('hidden');
+        gameBoards[0].classList.toggle('hidden');
     } else if (event.currentTarget.classList.contains('difficult-game')) {
         game.gameType = 'difficult';
-        difficultGameBoardView.classList.toggle('hidden');
+        gameBoards[1].classList.toggle('hidden');
     }
 }
 
@@ -63,7 +70,6 @@ function playGame(chosenFighter) {
     if (chosenFighter.id === computerFighter.id) {
         return `emoji It's a draw! emoji`;
     }
-    
     var winner = getWinner(chosenFighter, computerFighter)
     return `emoji ${winner} won this round! emoji`;
 }
@@ -84,9 +90,9 @@ function revealFighters(chosenFighter, computerFighter) {
     })
 
     var revealArea = document.createElement('div');
-    revealArea.classList.add('hidden');
+    revealArea.classList.toggle('hidden');
     revealArea.append(chosenFighter, computerFighter);
-    
+
     var thisGameBoard;
     if (game.gameType = 'classic') {
         thisGameBoard = gameBoards[0];
@@ -95,7 +101,8 @@ function revealFighters(chosenFighter, computerFighter) {
         thisGameBoard = gameBoards[1];
         gameBoards[1].appendChild(revealArea);
     }
-    revealArea.classList.remove('hidden');
+
+    revealArea.classList.toggle('hidden');
     setTimeout(() => {
         thisGameBoard.removeChild(revealArea);
         fighterAreas.forEach((div) => {
@@ -110,13 +117,14 @@ function getWinner(chosenFighter, computerFighter) {
         humanWins.innerText = `Wins: ${game.players[0].wins}`;
         return game.players[0].playerType;
     } else {
+        incrementWins(game.players[1]);
+        computerWins.innerText = `Wins: ${game.players[1].wins}`;
         return game.players[1].playerType;
     }
 }
 
-function getRandomFighter() {
-    var rulesKeys = Object.keys(rules)
-    return rulesKeys[getRandomIndex(rulesKeys)]
+function incrementWins(player) {
+    player.wins++;
 }
 
 function getRandomIndex(array) {
