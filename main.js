@@ -13,6 +13,7 @@ var chosenFighter;
 var gameSelectionView = document.querySelector('.game-selection');
 var gameOption = document.querySelectorAll('.game-option');
 var gameBoards = document.querySelectorAll('.game-board');
+var fighters = document.querySelectorAll('.fighters');
 var humanWins = document.getElementById('humanWins');
 var computerWins = document.getElementById('computerWins');
 
@@ -64,7 +65,7 @@ function createPlayer(playerType, playerToken) {
 }
 
 function playGame(chosenFighter) {
-    var computerFighter = getRandomFighter();
+    var computerFighter = selectFighter();
     if (chosenFighter === computerFighter) {
         return `emoji It's a draw! emoji`;
     }
@@ -74,14 +75,13 @@ function playGame(chosenFighter) {
 }
 
 function selectFighter(event) {
-    if (event.target.nodeName === 'IMG') {
+    if (!event && game.gameType === 'classic') {
+        return Array.from(fighters[0].children)[getRandomIndex(fighters[0].children)].id;
+    } else if (!event && game.gameType === 'difficult') {
+        return Array.from(fighters[1].children)[getRandomIndex(fighters[1].children)].id;
+    } else if (event.target.nodeName === 'IMG') {
         chosenFighter = event.target.id;
     }
-}
-
-function getRandomFighter() {
-    var rulesKeys = Object.keys(rules);
-    return rulesKeys[getRandomIndex(rulesKeys)];
 }
 
 function getWinner(chosenFighter, computerFighter) {
