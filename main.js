@@ -26,6 +26,7 @@ gameOption.forEach((option) => {
         selectGameType(e);
         createPlayers();
         gameSelectionView.classList.toggle('hidden');
+        changeGameButton.classList.toggle('hidden');
     });
 });
 
@@ -124,6 +125,7 @@ function getWinner(chosenFighter, computerFighter) {
 function returnToGameSelection() {
     currentGameBoard.classList.toggle('hidden');
     gameSelectionView.classList.toggle('hidden');
+    changeGameButton.classList.toggle('hidden');
 }
 
 function incrementWins(player) {
