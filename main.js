@@ -10,6 +10,7 @@ var rules = {
 
 var chosenFighter;
 
+var main = document.querySelector('main');
 var gameSelectionView = document.querySelector('.game-selection');
 var gameOption = document.querySelectorAll('.game-option');
 var gameBoards = document.querySelectorAll('.game-board');
@@ -98,9 +99,11 @@ function revealFighters(chosenFighter, computerFighter) {
     revealArea.append(chosenFighter, computerFighter);
     thisGameBoard.appendChild(revealArea);
     revealArea.classList.toggle('hidden');
+    main.classList.toggle('no-click');
     
     setTimeout(() => {
         thisGameBoard.removeChild(revealArea);
+        main.classList.toggle('no-click');
         thisGameBoard.firstElementChild.innerText = 'Choose your fighter!';
         fighterArea.classList.toggle('hidden');
     }, 5000);
