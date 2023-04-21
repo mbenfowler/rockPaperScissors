@@ -18,6 +18,7 @@ var gameBoards = document.querySelectorAll('.game-board');
 var fighterAreas = document.querySelectorAll('.fighters');
 var humanWins = document.getElementById('humanWins');
 var computerWins = document.getElementById('computerWins');
+var changeGameButton = document.getElementById('changeGame');
 
 gameOption.forEach((option) => {
     option.addEventListener('click', function(e) {
@@ -34,6 +35,8 @@ gameBoards.forEach((board) => {
         this.firstElementChild.innerText = playGame(chosenFighter);
     })
 })
+
+changeGameButton.addEventListener('click', returnToGameSelection)
 
 function createNewGame() {
     game = {
@@ -116,6 +119,11 @@ function getWinner(chosenFighter, computerFighter) {
     incrementWins(winner);
     computerWins.innerText = `Wins: ${winner.wins}`;
     return winner.playerType;
+}
+
+function returnToGameSelection() {
+    currentGameBoard.classList.toggle('hidden');
+    gameSelectionView.classList.toggle('hidden');
 }
 
 function incrementWins(player) {
