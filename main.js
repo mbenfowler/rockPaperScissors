@@ -37,7 +37,7 @@ gameBoards.forEach((board) => {
     })
 })
 
-changeGameButton.addEventListener('click', returnToGameSelection)
+changeGameButton.addEventListener('click', returnToGameSelection);
 
 function createNewGame() {
     game = {
