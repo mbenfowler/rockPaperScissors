@@ -82,6 +82,15 @@ img {
     width: 200px;
 }
 
+#changeGame {
+    margin-top: 50px;
+    background-color: #AB49DA;
+    font-family: 'Chalkduster', fantasy;
+    color: white;
+    height: 50px;
+    width: 150px;
+}
+
 .hidden {
     display: none;
 }
