@@ -48,15 +48,16 @@ h3 {
 .side-panel {
     max-width: 200px;
     flex-shrink: 0;
-    font-size: 20px;
 }
 
 .side-panel > span:nth-child(1) {
     padding-top: 30px;
+    font-size: 40px;
 }
 
 .side-panel > span:nth-child(n+2) {
     padding-bottom: 30px;
+    font-size: 20px;
 }
 
 .game-option {
@@ -67,6 +68,13 @@ h3 {
     width: 200px;
     margin-bottom: 35px;
     font-size: 13px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.game-option:hover {
+    background-color: white;
+    color: #AA4AD9;
 }
 
 .classic-game-board,
@@ -80,6 +88,7 @@ h3 {
 img {
     height: 200px;
     width: 200px;
+    cursor: pointer;
 }
 
 #changeGame {
@@ -89,6 +98,13 @@ img {
     color: white;
     height: 50px;
     width: 150px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#changeGame:hover {
+    background-color: white;
+    color: #AB49DA;
 }
 
 .hidden {
