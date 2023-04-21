@@ -60,8 +60,8 @@ function selectGameType(event) {
 }
 
 function createPlayers() {
-    var playerOne = createPlayer('Human', '&#129489;');
-    var playerTwo = createPlayer('Computer', '&#129302;');
+    var playerOne = createPlayer('Human', '\uD83E\uDDD1');
+    var playerTwo = createPlayer('Computer', '\uD83E\uDD16');
     game.players.push(playerOne, playerTwo);
 }
 
@@ -77,10 +77,10 @@ function playGame(chosenFighter) {
     var computerFighter = selectFighter().cloneNode();
     revealFighters(chosenFighter, computerFighter);
     if (chosenFighter.id === computerFighter.id) {
-        return `emoji It's a draw! emoji`;
+        return `\u2694 It's a draw! \u2694`;
     }
     var winner = getWinner(chosenFighter, computerFighter)
-    return `emoji ${winner} won this round! emoji`;
+    return `${winner.playerToken} ${winner.playerType} won this round! ${winner.playerToken}`;
 }
 
 function selectFighter(event) {
@@ -123,7 +123,7 @@ function getWinner(chosenFighter, computerFighter) {
 
     incrementWins(winner);
     winnerText.innerText = `Wins: ${winner.wins}`;
-    return winner.playerType;
+    return winner;
 }
 
 function incrementWins(player) {
