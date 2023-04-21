@@ -65,7 +65,7 @@ function createPlayer(playerType, playerToken) {
 }
 
 function playGame(chosenFighter) {
-    var computerFighter = selectFighter().cloneNode(true);
+    var computerFighter = selectFighter().cloneNode();
     revealFighters(chosenFighter, computerFighter);
     if (chosenFighter.id === computerFighter.id) {
         return `emoji It's a draw! emoji`;
@@ -80,34 +80,29 @@ function selectFighter(event) {
     } else if (!event && game.gameType === 'difficult') {
         return Array.from(fighterAreas[1].children)[getRandomIndex(fighterAreas[1].children)];
     } else if (event.target.nodeName === 'IMG') {
-        chosenFighter = event.target.cloneNode(true);
+        chosenFighter = event.target.cloneNode();
     }
 }
 
 function revealFighters(chosenFighter, computerFighter) {
-    fighterAreas.forEach((area) => {
-        area.classList.toggle('hidden');
-    })
-
-    var revealArea = document.createElement('div');
-    revealArea.classList.toggle('hidden');
-    revealArea.append(chosenFighter, computerFighter);
-
     var thisGameBoard;
-    if (game.gameType = 'classic') {
+    if (game.gameType === 'classic') {
         thisGameBoard = gameBoards[0];
-        gameBoards[0].appendChild(revealArea);
-    } else {
+    } else if (game.gameType === 'difficult') {
         thisGameBoard = gameBoards[1];
-        gameBoards[1].appendChild(revealArea);
     }
 
+    var fighterArea = thisGameBoard.lastElementChild;
+    fighterArea.classList.toggle('hidden');
+    var revealArea = fighterArea.cloneNode();
+    revealArea.append(chosenFighter, computerFighter);
+    thisGameBoard.appendChild(revealArea);
     revealArea.classList.toggle('hidden');
+    
     setTimeout(() => {
         thisGameBoard.removeChild(revealArea);
-        fighterAreas.forEach((div) => {
-            div.classList.toggle('hidden');
-        })
+        thisGameBoard.firstElementChild.innerText = 'Choose your fighter!';
+        fighterArea.classList.toggle('hidden');
     }, 5000);
 }
 
