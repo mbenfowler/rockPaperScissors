@@ -1,11 +1,11 @@
 var game;
 
 var rules = {
-    'rock': ['scissors', 'lizard'],
-    'paper': ['rock', 'alien'],
-    'scissors': ['paper', 'lizard'],
-    'lizard': ['paper', 'alien'],
-    'alien': ['scissors', 'rock']
+    rock: ['scissors', 'lizard'],
+    paper: ['rock', 'alien'],
+    scissors: ['paper', 'lizard'],
+    lizard: ['paper', 'alien'],
+    alien: ['scissors', 'rock']
 }
 
 var currentGameBoard;
@@ -20,11 +20,14 @@ var humanWins = document.getElementById('humanWins');
 var computerWins = document.getElementById('computerWins');
 var changeGameButton = document.getElementById('changeGame');
 
+window.addEventListener('load', function() {
+    createNewGame();
+    createPlayers();
+});
+
 gameOption.forEach((option) => {
     option.addEventListener('click', function(e) {
-        createNewGame();
         selectGameType(e);
-        createPlayers();
         hideToggler(gameSelectionView, changeGameButton);
     });
 });
@@ -104,28 +107,31 @@ function revealFighters(chosenFighter, computerFighter) {
         main.classList.toggle('no-click');
         currentGameBoard.firstElementChild.innerText = 'Choose your fighter!';
         hideToggler(fighterArea);
-    }, 5000);
+    }, 3000);
 }
 
 function getWinner(chosenFighter, computerFighter) {
     var winner;
+    var winnerText;
     if (rules[chosenFighter.id].includes(computerFighter.id)) {
         winner = game.players[0];
+        winnerText = humanWins;
     } else {
         winner = game.players[1];
+        winnerText = computerWins;
     }
 
     incrementWins(winner);
-    computerWins.innerText = `Wins: ${winner.wins}`;
+    winnerText.innerText = `Wins: ${winner.wins}`;
     return winner.playerType;
-}
-
-function returnToGameSelection() {
-    hideToggler(currentGameBoard, gameSelectionView, changeGameButton);
 }
 
 function incrementWins(player) {
     player.wins++;
+}
+
+function returnToGameSelection() {
+    hideToggler(currentGameBoard, gameSelectionView, changeGameButton);
 }
 
 function getRandomIndex(array) {
