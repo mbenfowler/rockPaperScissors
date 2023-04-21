@@ -25,8 +25,7 @@ gameOption.forEach((option) => {
         createNewGame();
         selectGameType(e);
         createPlayers();
-        gameSelectionView.classList.toggle('hidden');
-        changeGameButton.classList.toggle('hidden');
+        hideToggler(gameSelectionView, changeGameButton);
     });
 });
 
@@ -50,12 +49,11 @@ function selectGameType(event) {
     if (event.currentTarget.classList.contains('classic-game')) {
         game.gameType = 'classic';
         currentGameBoard = gameBoards[0];
-        currentGameBoard.classList.toggle('hidden');
     } else if (event.currentTarget.classList.contains('difficult-game')) {
         game.gameType = 'difficult';
         currentGameBoard = gameBoards[1];
-        currentGameBoard.classList.toggle('hidden');
     }
+    hideToggler(currentGameBoard);
 }
 
 function createPlayers() {
@@ -94,18 +92,18 @@ function selectFighter(event) {
 
 function revealFighters(chosenFighter, computerFighter) {
     var fighterArea = currentGameBoard.lastElementChild;
-    fighterArea.classList.toggle('hidden');
+    hideToggler(fighterArea);
     var revealArea = fighterArea.cloneNode();
     revealArea.append(chosenFighter, computerFighter);
     currentGameBoard.appendChild(revealArea);
     main.classList.toggle('no-click');
-    revealArea.classList.toggle('hidden');
+    hideToggler(revealArea);
     
     setTimeout(() => {
         currentGameBoard.removeChild(revealArea);
         main.classList.toggle('no-click');
         currentGameBoard.firstElementChild.innerText = 'Choose your fighter!';
-        fighterArea.classList.toggle('hidden');
+        hideToggler(fighterArea);
     }, 5000);
 }
 
@@ -123,9 +121,7 @@ function getWinner(chosenFighter, computerFighter) {
 }
 
 function returnToGameSelection() {
-    currentGameBoard.classList.toggle('hidden');
-    gameSelectionView.classList.toggle('hidden');
-    changeGameButton.classList.toggle('hidden');
+    hideToggler(currentGameBoard, gameSelectionView, changeGameButton);
 }
 
 function incrementWins(player) {
@@ -134,4 +130,10 @@ function incrementWins(player) {
 
 function getRandomIndex(array) {
     return Math.floor(Math.random() * array.length);
+}
+
+function hideToggler(...args) {
+    args.forEach((arg) => {
+        arg.classList.toggle('hidden');
+    })
 }
