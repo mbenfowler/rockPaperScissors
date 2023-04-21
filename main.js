@@ -8,6 +8,7 @@ var rules = {
     'alien': ['scissors', 'rock']
 }
 
+var currentGameBoard;
 var chosenFighter;
 
 var main = document.querySelector('main');
@@ -44,10 +45,12 @@ function createNewGame() {
 function selectGameType(event) {
     if (event.currentTarget.classList.contains('classic-game')) {
         game.gameType = 'classic';
-        gameBoards[0].classList.toggle('hidden');
+        currentGameBoard = gameBoards[0];
+        currentGameBoard.classList.toggle('hidden');
     } else if (event.currentTarget.classList.contains('difficult-game')) {
         game.gameType = 'difficult';
-        gameBoards[1].classList.toggle('hidden');
+        currentGameBoard = gameBoards[1];
+        currentGameBoard.classList.toggle('hidden');
     }
 }
 
@@ -86,39 +89,33 @@ function selectFighter(event) {
 }
 
 function revealFighters(chosenFighter, computerFighter) {
-    var thisGameBoard;
-    if (game.gameType === 'classic') {
-        thisGameBoard = gameBoards[0];
-    } else if (game.gameType === 'difficult') {
-        thisGameBoard = gameBoards[1];
-    }
-
-    var fighterArea = thisGameBoard.lastElementChild;
+    var fighterArea = currentGameBoard.lastElementChild;
     fighterArea.classList.toggle('hidden');
     var revealArea = fighterArea.cloneNode();
     revealArea.append(chosenFighter, computerFighter);
-    thisGameBoard.appendChild(revealArea);
-    revealArea.classList.toggle('hidden');
+    currentGameBoard.appendChild(revealArea);
     main.classList.toggle('no-click');
+    revealArea.classList.toggle('hidden');
     
     setTimeout(() => {
-        thisGameBoard.removeChild(revealArea);
+        currentGameBoard.removeChild(revealArea);
         main.classList.toggle('no-click');
-        thisGameBoard.firstElementChild.innerText = 'Choose your fighter!';
+        currentGameBoard.firstElementChild.innerText = 'Choose your fighter!';
         fighterArea.classList.toggle('hidden');
     }, 5000);
 }
 
 function getWinner(chosenFighter, computerFighter) {
+    var winner;
     if (rules[chosenFighter.id].includes(computerFighter.id)) {
-        incrementWins(game.players[0]);
-        humanWins.innerText = `Wins: ${game.players[0].wins}`;
-        return game.players[0].playerType;
+        winner = game.players[0];
     } else {
-        incrementWins(game.players[1]);
-        computerWins.innerText = `Wins: ${game.players[1].wins}`;
-        return game.players[1].playerType;
+        winner = game.players[1];
     }
+
+    incrementWins(winner);
+    computerWins.innerText = `Wins: ${winner.wins}`;
+    return winner.playerType;
 }
 
 function incrementWins(player) {
