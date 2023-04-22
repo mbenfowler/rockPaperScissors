@@ -22,7 +22,16 @@ var changeGameButton = document.getElementById('changeGame');
 
 window.addEventListener('load', function() {
     createNewGame();
-    createPlayers();
+    var previousHumanWins = (!localStorage.getItem("humanWins")) ? 0 : localStorage.getItem("humanWins");
+    var previousComputerWins = (!localStorage.getItem("computerWins")) ? 0 : localStorage.getItem("computerWins");
+    createPlayers(previousHumanWins, previousComputerWins);
+    humanWins.innerText = `Wins: ${game.players[0].wins}`;
+    computerWins.innerText = `Wins: ${game.players[1].wins}`;
+});
+
+window.addEventListener('beforeunload', function() {
+    localStorage.setItem("humanWins", game.players[0].wins);
+    localStorage.setItem("computerWins", game.players[1].wins);
 });
 
 gameOption.forEach((option) => {
@@ -59,17 +68,17 @@ function selectGameType(event) {
     hideToggler(currentGameBoard);
 }
 
-function createPlayers() {
-    var playerOne = createPlayer('Human', '\uD83E\uDDD1');
-    var playerTwo = createPlayer('Computer', '\uD83E\uDD16');
+function createPlayers(previousHumanWins, previousComputerWins) {
+    var playerOne = createPlayer('Human', '\uD83E\uDDD1', previousHumanWins);
+    var playerTwo = createPlayer('Computer', '\uD83E\uDD16', previousComputerWins);
     game.players.push(playerOne, playerTwo);
 }
 
-function createPlayer(playerType, playerToken) {
+function createPlayer(playerType, playerToken, wins = 0) {
     return {
         playerType,
         playerToken,
-        wins: 0
+        wins
     };
 }
 
