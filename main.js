@@ -16,7 +16,7 @@ var chosenFighter;
 
 var main = document.querySelector('main');
 var gameSelectionView = document.querySelector('.game-selection');
-var gameOption = document.querySelectorAll('.game-option');
+var gameOptions = document.querySelectorAll('.game-option');
 var gameBoards = document.querySelectorAll('.game-board');
 var fighterAreas = document.querySelectorAll('.fighters');
 var humanWins = document.getElementById('humanWins');
@@ -37,7 +37,7 @@ window.addEventListener('beforeunload', function() {
     localStorage.setItem("computerWins", game.players[1].wins);
 });
 
-gameOption.forEach((option) => {
+gameOptions.forEach((option) => {
     option.addEventListener('click', function(e) {
         selectGameType(e);
         hideToggler(gameSelectionView, changeGameButton);
@@ -47,7 +47,15 @@ gameOption.forEach((option) => {
 gameBoards.forEach((board) => {
     board.addEventListener('click', function(e) {
         chosenFighter = selectFighter(e);
-        this.firstElementChild.innerText = playGame(chosenFighter);
+        var imgRect = e.target.getBoundingClientRect();
+        var playerIconSpan = document.createElement('span');
+        stylePlayerIconSpan(playerIconSpan, imgRect);
+        e.target.parentNode.appendChild(playerIconSpan);
+        setTimeout(() => {
+            e.target.parentNode.removeChild(playerIconSpan);
+            this.firstElementChild.innerText = playGame(chosenFighter);
+        }, 500);
+        
     })
 })
 
@@ -136,6 +144,15 @@ function getWinner(chosenFighter, computerFighter) {
 
 function incrementWins(player) {
     player.wins++;
+}
+
+function stylePlayerIconSpan(playerIconSpan, imgRect) {
+    var bodyRect = document.body.getBoundingClientRect();
+    playerIconSpan.style.position = 'absolute';
+    playerIconSpan.style.left = `${imgRect.left - bodyRect.left + window.scrollX - 120}px`;
+    playerIconSpan.style.top = `${imgRect.top - bodyRect.top + window.scrollY - 100}px`;
+    playerIconSpan.style.fontSize = '40px';
+    playerIconSpan.innerText = humanEmoji;
 }
 
 function returnToGameSelection() {
