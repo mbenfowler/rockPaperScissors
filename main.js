@@ -1,5 +1,4 @@
 var game;
-
 var rules = {
     rock: ['scissors', 'lizard'],
     paper: ['rock', 'alien'],
@@ -7,6 +6,10 @@ var rules = {
     lizard: ['paper', 'alien'],
     alien: ['scissors', 'rock']
 }
+
+var humanEmoji = '\uD83E\uDDD1';
+var computerEmoji = '\uD83E\uDD16';
+var swordsEmoji = '\u2694';
 
 var currentGameBoard;
 var chosenFighter;
@@ -22,8 +25,8 @@ var changeGameButton = document.getElementById('changeGame');
 
 window.addEventListener('load', function() {
     createNewGame();
-    var previousHumanWins = (!localStorage.getItem("humanWins")) ? 0 : localStorage.getItem("humanWins");
-    var previousComputerWins = (!localStorage.getItem("computerWins")) ? 0 : localStorage.getItem("computerWins");
+    var previousHumanWins = !localStorage.getItem("humanWins") ? 0 : localStorage.getItem("humanWins");
+    var previousComputerWins = !localStorage.getItem("computerWins") ? 0 : localStorage.getItem("computerWins");
     createPlayers(previousHumanWins, previousComputerWins);
     humanWins.innerText = `Wins: ${game.players[0].wins}`;
     computerWins.innerText = `Wins: ${game.players[1].wins}`;
@@ -43,7 +46,7 @@ gameOption.forEach((option) => {
 
 gameBoards.forEach((board) => {
     board.addEventListener('click', function(e) {
-        selectFighter(e);
+        chosenFighter = selectFighter(e);
         this.firstElementChild.innerText = playGame(chosenFighter);
     })
 })
@@ -58,10 +61,10 @@ function createNewGame() {
 }
 
 function selectGameType(event) {
-    if (event.currentTarget.classList.contains('classic-game')) {
+    if (event.currentTarget.id === 'classicGame') {
         game.gameType = 'classic';
         currentGameBoard = gameBoards[0];
-    } else if (event.currentTarget.classList.contains('difficult-game')) {
+    } else if (event.currentTarget.id === 'difficultGame') {
         game.gameType = 'difficult';
         currentGameBoard = gameBoards[1];
     }
@@ -69,8 +72,8 @@ function selectGameType(event) {
 }
 
 function createPlayers(previousHumanWins, previousComputerWins) {
-    var playerOne = createPlayer('Human', '\uD83E\uDDD1', previousHumanWins);
-    var playerTwo = createPlayer('Computer', '\uD83E\uDD16', previousComputerWins);
+    var playerOne = createPlayer('Human', humanEmoji, previousHumanWins);
+    var playerTwo = createPlayer('Computer', computerEmoji, previousComputerWins);
     game.players.push(playerOne, playerTwo);
 }
 
@@ -86,20 +89,16 @@ function playGame(chosenFighter) {
     var computerFighter = selectFighter().cloneNode();
     revealFighters(chosenFighter, computerFighter);
     if (chosenFighter.id === computerFighter.id) {
-        return `\u2694 It's a draw! \u2694`;
+        return `${swordsEmoji} It's a draw! ${swordsEmoji}`;
     }
     var winner = getWinner(chosenFighter, computerFighter)
     return `${winner.playerToken} ${winner.playerType} won this round! ${winner.playerToken}`;
 }
 
 function selectFighter(event) {
-    if (!event && game.gameType === 'classic') {
-        return Array.from(fighterAreas[0].children)[getRandomIndex(fighterAreas[0].children)];
-    } else if (!event && game.gameType === 'difficult') {
-        return Array.from(fighterAreas[1].children)[getRandomIndex(fighterAreas[1].children)];
-    } else if (event.target.nodeName === 'IMG') {
-        chosenFighter = event.target.cloneNode();
-    }
+    return !event && game.gameType === 'classic' ? Array.from(fighterAreas[0].children)[getRandomIndex(fighterAreas[0].children)]
+         : !event && game.gameType === 'difficult' ? Array.from(fighterAreas[1].children)[getRandomIndex(fighterAreas[1].children)]
+         : event.target.cloneNode();
 }
 
 function revealFighters(chosenFighter, computerFighter) {
