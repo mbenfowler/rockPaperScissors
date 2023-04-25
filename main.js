@@ -46,16 +46,17 @@ gameOptions.forEach((option) => {
 
 gameBoards.forEach((board) => {
     board.addEventListener('click', function(e) {
-        chosenFighter = selectFighter(e);
-        playerIconSpan = stylePlayerIconSpan(e);
-        e.target.parentNode.appendChild(playerIconSpan);
-        setTimeout(() => {
-            e.target.parentNode.removeChild(playerIconSpan);
-            this.firstElementChild.innerText = playGame(chosenFighter);
-        }, 500);
-        
-    })
-})
+        if(e.target.nodeName === 'IMG') {
+            chosenFighter = selectFighter(e);
+            playerIconSpan = stylePlayerIconSpan(e);
+            e.target.parentNode.appendChild(playerIconSpan);
+            setTimeout(() => {
+                e.target.parentNode.removeChild(playerIconSpan);
+                this.firstElementChild.innerText = playGame(chosenFighter);
+            }, 500);
+        }
+    });
+});
 
 changeGameButton.addEventListener('click', returnToGameSelection);
 
