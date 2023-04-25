@@ -2,16 +2,16 @@
 
 ### Abstract:
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
-Have you ever wanted to play one of the first games you learned as a child against a bot on the intenet? Well look no further - play against my super advanced AI who is guaranteed to give you a run for your money almost exactly 33.3% of the time.
+Have you ever wanted to play one of the first games you learned as a child against a bot on the internet? Well look no further - play against my super advanced AI who is guaranteed to give you a run for your money almost exactly 33.3% of the time.
 #### Features!
 - Fast-paced roshambo action, with TWO challenging levels to choose from: classic and difficult!
 - Once you have entered a game, select your fighter!
-    - all clickable elements have a pointer to help guide your important choices
+    - All clickable elements have a pointer to help guide your important choices.
     - Your player icon will appear below your fighter upon clicking, confirming the choice is locked in!
-    - The computer reveals their fighter at the same time, with the revealed winner incrementing their wins.
+    - The computer reveals their fighter at the same time, with the declared winner incrementing their wins.
 - At any point, you can click the "CHANGE GAME?" button in your player sidebar to return to the main page to select a different game option.
 - Win counts persist across game types.
-- If you refresh the page or close your browser, have no fear! Your record of domination will be preserved across sessions!
+- If you refresh the page or close your browser, have no fear! Your record of dominance will be preserved across sessions!
 
 ### Installation Instructions:
 [//]: <> (What steps does a person have to take to get your app cloned down and running?)
@@ -27,7 +27,7 @@ Have you ever wanted to play one of the first games you learned as a child again
 ### Context:
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
 - This Turing solo project kicked-off on Tues 18, 2023 and we were provided a full week to complete it.
-- This was the final solo project of Mod1
+- This was the final solo project of Mod1.
 
 ### Contributors:
 [//]: <> (Who worked on this application? Link to their GitHubs.)
@@ -49,5 +49,5 @@ Learning goals were to solidify and demonstrate understanding of:
 - getting comfortable with ternary and spread operators
 
 #### Challenges:
-- absolute positioning is always a challenge. I could not for the life of me figure out how to consistantly place the human emoji over the fighter they had chosen.
-- i'm still shaky on preventDefault and stopPropagation. Personal to-do added to experiment more with those.
+- Absolute positioning is always a challenge. In particular, `getBoundingClientRect()` wasn't acting quite as expected.
+- I'm still shaky on preventDefault and stopPropagation. I've added a personal to-do to read and experiment more with those.
