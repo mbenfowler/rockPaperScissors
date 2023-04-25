@@ -4,12 +4,12 @@
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
 Have you ever wanted to play one of the first games you learned as a child against a bot on the intenet? Well look no further - play against my super advanced AI who is guaranteed to give you a run for your money almost exactly 33.3% of the time.
 #### Features!
-- Fast-paced roshambo action, with TWO difficulty levels to choose from: classic and difficult!
-- Once in a game, select your fighter!
+- Fast-paced roshambo action, with TWO challenging levels to choose from: classic and difficult!
+- Once you have entered a game, select your fighter!
     - all clickable elements have a pointer to help guide your important choices
     - Your player icon will appear below your fighter upon clicking, confirming the choice is locked in!
     - The computer reveals their fighter at the same time, with the revealed winner incrementing their wins.
-- At any point, you can click the "CHANGE GAME?" button in your game sidebar to return to the main page to select a different game option.
+- At any point, you can click the "CHANGE GAME?" button in your player sidebar to return to the main page to select a different game option.
 - Win counts persist across game types.
 - If you refresh the page or close your browser, have no fear! Your record of domination will be preserved across sessions!
 
@@ -22,7 +22,7 @@ Have you ever wanted to play one of the first games you learned as a child again
 5. View the app locally in the browser by running `open index.html` in your terminal
 
 ### Preview of App:
-![app preview animation]()
+![app preview animation](./assets/rockPaperScissorsDemo.gif)
 
 ### Context:
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
@@ -49,5 +49,5 @@ Learning goals were to solidify and demonstrate understanding of:
 - getting comfortable with ternary and spread operators
 
 #### Challenges:
-- absolute positioning is always a challenge.
-- i'm still shaky on preventDefault and stopPropagation
+- absolute positioning is always a challenge. I could not for the life of me figure out how to consistantly place the human emoji over the fighter they had chosen.
+- i'm still shaky on preventDefault and stopPropagation. Personal to-do added to experiment more with those.
