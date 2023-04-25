@@ -46,7 +46,7 @@ gameOptions.forEach((option) => {
 
 gameBoards.forEach((board) => {
     board.addEventListener('click', function(e) {
-        if(e.target.nodeName === 'IMG') {
+        if (e.target.nodeName === 'IMG') {
             chosenFighter = selectFighter(e);
             playerIconSpan = stylePlayerIconSpan(e);
             e.target.parentNode.appendChild(playerIconSpan);
