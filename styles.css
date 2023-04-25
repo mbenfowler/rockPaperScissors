@@ -103,6 +103,11 @@ img {
     color: #AB49DA;
 }
 
+#playerEmojiOnSelection {
+    position: absolute;
+    font-size: 40px;
+}
+
 .hidden {
     display: none;
 }

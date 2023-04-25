@@ -47,9 +47,7 @@ gameOptions.forEach((option) => {
 gameBoards.forEach((board) => {
     board.addEventListener('click', function(e) {
         chosenFighter = selectFighter(e);
-        var imgRect = e.target.getBoundingClientRect();
-        var playerIconSpan = document.createElement('span');
-        stylePlayerIconSpan(playerIconSpan, imgRect);
+        playerIconSpan = stylePlayerIconSpan(e);
         e.target.parentNode.appendChild(playerIconSpan);
         setTimeout(() => {
             e.target.parentNode.removeChild(playerIconSpan);
@@ -69,13 +67,9 @@ function createNewGame() {
 }
 
 function selectGameType(event) {
-    if (event.currentTarget.id === 'classicGame') {
-        game.gameType = 'classic';
-        currentGameBoard = gameBoards[0];
-    } else if (event.currentTarget.id === 'difficultGame') {
-        game.gameType = 'difficult';
-        currentGameBoard = gameBoards[1];
-    }
+    var gameBoardIndex = Array.from(event.currentTarget.parentNode.children).indexOf(event.currentTarget) - 1;
+    game.gameType = event.currentTarget.id;
+    currentGameBoard = gameBoards[gameBoardIndex];
     hideToggler(currentGameBoard);
 }
 
@@ -99,7 +93,7 @@ function playGame(chosenFighter) {
     if (chosenFighter.id === computerFighter.id) {
         return `${swordsEmoji} It's a draw! ${swordsEmoji}`;
     }
-    var winner = getWinner(chosenFighter, computerFighter)
+    var winner = getWinner(chosenFighter, computerFighter);
     return `${winner.playerToken} ${winner.playerType} won this round! ${winner.playerToken}`;
 }
 
@@ -146,13 +140,15 @@ function incrementWins(player) {
     player.wins++;
 }
 
-function stylePlayerIconSpan(playerIconSpan, imgRect) {
+function stylePlayerIconSpan(event) {
+    var imgRect = event.target.getBoundingClientRect();
     var bodyRect = document.body.getBoundingClientRect();
-    playerIconSpan.style.position = 'absolute';
+    var playerIconSpan = document.createElement('span');
+    playerIconSpan.setAttribute('id', 'playerEmojiOnSelection');
     playerIconSpan.style.left = `${imgRect.left - bodyRect.left + window.scrollX - 120}px`;
     playerIconSpan.style.top = `${imgRect.top - bodyRect.top + window.scrollY - 100}px`;
-    playerIconSpan.style.fontSize = '40px';
     playerIconSpan.innerText = humanEmoji;
+    return playerIconSpan;
 }
 
 function returnToGameSelection() {
