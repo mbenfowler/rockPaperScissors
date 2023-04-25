@@ -142,11 +142,10 @@ function incrementWins(player) {
 
 function stylePlayerIconSpan(event) {
     var imgRect = event.target.getBoundingClientRect();
-    var bodyRect = document.body.getBoundingClientRect();
     var playerIconSpan = document.createElement('span');
-    playerIconSpan.setAttribute('id', 'playerEmojiOnSelection');
-    playerIconSpan.style.left = `${imgRect.left - bodyRect.left + window.scrollX - 120}px`;
-    playerIconSpan.style.top = `${imgRect.top - bodyRect.top + window.scrollY - 100}px`;
+    playerIconSpan.setAttribute('id', 'playerEmojiOnSelection')
+    playerIconSpan.style.left = (imgRect.left + window.scrollX - 120) + 'px';
+    playerIconSpan.style.top = (imgRect.top + window.scrollY - 100) + 'px';
     playerIconSpan.innerText = humanEmoji;
     return playerIconSpan;
 }
