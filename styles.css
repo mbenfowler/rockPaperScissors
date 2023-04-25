@@ -79,6 +79,13 @@ h3 {
 
 .fighters {
     position: relative;
+    padding: 0 10vw 0 10vw;
+}
+
+@media screen and (max-width: 1200px) {
+    .fighters {
+        padding: 0;
+    }
 }
 
 img {
@@ -101,6 +108,11 @@ img {
 #changeGame:hover {
     background-color: white;
     color: #AB49DA;
+}
+
+#playerEmojiOnSelection {
+    position: absolute;
+    font-size: 40px;
 }
 
 .hidden {
