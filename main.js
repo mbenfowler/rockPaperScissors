@@ -147,7 +147,6 @@ function stylePlayerIconSpan(event) {
     playerIconSpan.style.left = (imgRect.left + window.scrollX - 120) + 'px';
     playerIconSpan.style.top = (imgRect.top + window.scrollY - 100) + 'px';
     playerIconSpan.innerText = humanEmoji;
-    console.log(playerIconSpan)
     return playerIconSpan;
 }
 
